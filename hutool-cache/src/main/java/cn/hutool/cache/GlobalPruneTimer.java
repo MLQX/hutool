@@ -3,11 +3,9 @@ package cn.hutool.cache;
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.StrUtil;
 
+import java.sql.Struct;
 import java.util.List;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -53,10 +51,22 @@ public enum GlobalPruneTimer {
 	 * 创建定时器
 	 */
 	public void create() {
+		//单例 ScheduledThreadPoolExecutor
 		if (null != pruneTimer) {
 			shutdownNow();
 		}
-		this.pruneTimer = new ScheduledThreadPoolExecutor(16, r -> ThreadUtil.newThread(r, StrUtil.format("Pure-Timer-{}", cacheTaskNumber.getAndIncrement())));
+		this.pruneTimer = new ScheduledThreadPoolExecutor(16,
+				r -> ThreadUtil.newThread(r, StrUtil.format("Pure-Timer-{}",
+						cacheTaskNumber.getAndIncrement())));
+		/**
+		 * this.pruneTimer = new ScheduledThreadPoolExecutor(8, new ThreadFactory() {
+		 *                        @Override
+		 *            public Thread newThread(Runnable r) {
+		 * 				return ThreadUtil.newThread(r, StrUtil.format("Pure-Time-{}",
+		 * 						cacheTaskNumber.getAndIncrement()));
+		 *            }        * 		});
+		 */
+
 	}
 
 	/**
