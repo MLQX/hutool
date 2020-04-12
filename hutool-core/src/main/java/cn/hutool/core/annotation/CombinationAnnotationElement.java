@@ -1,6 +1,7 @@
 package cn.hutool.core.annotation;
 
 import cn.hutool.core.collection.CollUtil;
+import jdk.internal.jline.internal.TestAccessible;
 
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
@@ -103,6 +104,7 @@ public class CombinationAnnotationElement implements AnnotatedElement, Serializa
 		// 直接注解
 		for (Annotation annotation : annotations) {
 			annotationType = annotation.annotationType();
+			//该注解类型不在元注解类型里面的话
 			if (false == META_ANNOTATIONS.contains(annotationType)) {
 				declaredAnnotationMap.put(annotationType, annotation);
 				parseDeclared(annotationType.getDeclaredAnnotations());
@@ -125,4 +127,6 @@ public class CombinationAnnotationElement implements AnnotatedElement, Serializa
 			}
 		}
 	}
+
+
 }
