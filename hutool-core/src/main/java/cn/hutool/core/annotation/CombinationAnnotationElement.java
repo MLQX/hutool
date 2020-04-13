@@ -1,7 +1,7 @@
 package cn.hutool.core.annotation;
 
 import cn.hutool.core.collection.CollUtil;
-import jdk.internal.jline.internal.TestAccessible;
+
 
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
@@ -44,7 +44,7 @@ public class CombinationAnnotationElement implements AnnotatedElement, Serializa
 
 	/**
 	 * 构造
-	 * 
+	 *
 	 * @param element 需要解析注解的元素：可以是Class、Method、Field、Constructor、ReflectPermission
 	 */
 	public CombinationAnnotationElement(AnnotatedElement element) {
@@ -74,17 +74,17 @@ public class CombinationAnnotationElement implements AnnotatedElement, Serializa
 		final Collection<Annotation> annotations = this.declaredAnnotationMap.values();
 		return annotations.toArray(new Annotation[0]);
 	}
-	
+
 	/**
 	 * 初始化
-	 * 
+	 *
 	 * @param element 元素
 	 */
 	private void init(AnnotatedElement element) {
 		final Annotation[] declaredAnnotations = element.getDeclaredAnnotations();
 		this.declaredAnnotationMap = new HashMap<>();
 		parseDeclared(declaredAnnotations);
-		
+
 		final Annotation[] annotations = element.getAnnotations();
 		if(Arrays.equals(declaredAnnotations, annotations)) {
 			this.annotationMap = this.declaredAnnotationMap;
@@ -111,7 +111,7 @@ public class CombinationAnnotationElement implements AnnotatedElement, Serializa
 			}
 		}
 	}
-	
+
 	/**
 	 * 进行递归解析注解，直到全部都是元注解为止
 	 *

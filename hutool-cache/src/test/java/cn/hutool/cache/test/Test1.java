@@ -15,7 +15,16 @@ public class Test1 {
     public void test1(){
         //CacheUtil.newFIFOCache(8, 200) 返回一个FIFOCache<>
         FIFOCache<String, Object> objects = CacheUtil.newFIFOCache(8, 200);
-        objects.put();
-
+        objects.put("h1",new Object());
+        objects.put("h2",new Object());
+        objects.get("h2");
+        System.out.println(objects.getHitCount());
     }
+
+
+
+
+
+
+
 }

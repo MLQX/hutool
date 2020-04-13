@@ -56,6 +56,7 @@ public abstract class AbstractCache<K, V> implements Cache<K, V> {
 		writeLock.lock();
 
 		try {
+			//
 			putWithoutLock(key, object, timeout);
 		} finally {
 			writeLock.unlock();
@@ -75,9 +76,12 @@ public abstract class AbstractCache<K, V> implements Cache<K, V> {
 		if (timeout != 0) {
 			existCustomTimeout = true;
 		}
+		//缓存满了
 		if (isFull()) {
+
 			pruneCache();
 		}
+		//key,co
 		cacheMap.put(key, co);
 	}
 	// ---------------------------------------------------------------- put end
