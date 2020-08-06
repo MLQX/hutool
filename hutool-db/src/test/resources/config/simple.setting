@@ -1,0 +1,8 @@
+# default
+username = zhangsan
+password = 123456
+
+[hello]
+username = lisi
+password = 654321
+
